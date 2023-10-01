@@ -24,7 +24,7 @@ class Player {
         void set_x(int new_x);
         void set_y(int new_y);
         char get_cursor();
-        int move_cursor(int new_x, int new_y);
+        bool move_cursor(int new_x, int new_y);
         int create_structure();
         int create_unit();
 };

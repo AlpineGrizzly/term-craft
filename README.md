@@ -7,9 +7,10 @@ C++ Terminal style game inspired by Starcraft I and II gameplay and my love of t
  apt-get install libncurses5-dev libncursesw5-dev
 ```
 ### TODO 
-- [ ] Drawing of map
+- [X] Drawing of map
 - [ ] Opposing players with bases that have associated health
 - [ ] Ability to create structures
+- [ ] Structures will have a time before they are built , represented by the default structure icon
 - [ ] Ability to create and control units (Selection? with HUD that shows stats on the individual units health and attack and whatnot)
 - [ ] Terrain elements such as cliffs and trees
 - [ ] Game start screen

@@ -1,3 +1,12 @@
+/**
+ * map.h
+ * 
+ * Contains function declaractions for the map class
+ * 
+ * Author R3V
+ * Created October 1st, 2023
+*/
+
 #include "player.h"
 
 #pragma once 

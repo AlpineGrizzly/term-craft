@@ -1,3 +1,11 @@
+/**
+ * player.cpp
+ * 
+ * Contains function implementations for player class
+ * 
+ * Author R3V
+ * Created October 1st, 2023
+*/
 #include <iostream>
 #include "player.h"
 
@@ -47,9 +55,9 @@ char Player::get_cursor() {
  * @param new_x New x location to which to move player
  * @param new_y New y location to which to move player
  * 
- * @return 1 if the move could be made, 0 otherwise
+ * @return True if a valid move was made, false otherwise
 */
-int Player::move_cursor(int new_x, int new_y) { 
+bool Player::move_cursor(int new_x, int new_y) { 
     return 0;
 }
 

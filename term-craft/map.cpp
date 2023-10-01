@@ -2,6 +2,9 @@
  * map.cpp
  * 
  * Function implementations of map class
+ *
+ * Author R3V
+ * Created October 1st, 2023
 */
 
 #include <iostream>
@@ -21,11 +24,12 @@ void Map::draw_map(Player pl1, Player pl2) {
                 continue;
             }
 
-            /* Draw the field */
+            /* Draw structures */
+            /* Draw the map */
             if(i == 0 || j == 0 || i == this->dim_y - 1 || j == this->dim_x - 1) /* Draw edges */
                 printf("# ");
             else
-                printf(". "); /* Draw inside */
+                printf(". ");
         }
         putc('\n', stdout);
     }
