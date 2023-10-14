@@ -8,23 +8,40 @@
 
 #pragma once
 
+/**
+ * Pos
+ * 
+ * Class to represent position on the board
+*/
+class Pos {
+    private: 
+        int x_pos;
+        int y_pos;
+
+    public: 
+        Pos(int x, int y){ 
+            this->x_pos = x;
+            this->y_pos = y;
+        }
+        void set_x(int new_x) {this->x_pos = new_x;}
+        void set_y(int new_y) {this->y_pos = new_y;}
+        int  get_x() {return this->x_pos;}
+        int  get_y() {return this->y_pos;}
+};
+
 class Player { 
     private:
-        int curr_x;
-        int curr_y; 
+        Pos* pos; /* Position of Player on field */
         char cursor; /* Symbol that represents the player on the map */
     public:
         Player(char cursor, int start_x, int start_y) { /* Constructor for players cursor and start location */
             this->cursor = cursor;
-            this->curr_x = start_x;
-            this->curr_y = start_y;
+            this->pos = new Pos(start_x, start_y); 
         }
-        int get_x();
-        int get_y();
-        void set_x(int new_x);
-        void set_y(int new_y);
+        void set_pos(Pos new_pos);
+        Pos* get_pos();
         char get_cursor();
-        bool move_cursor(int new_x, int new_y);
+        void move_cursor(Pos new_pos);
         int create_structure();
         int create_unit();
 };

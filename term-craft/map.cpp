@@ -20,15 +20,19 @@
 using namespace std;
 
 void Map::draw_map(Player pl1, Player pl2) {
+    /* Get current location of players */
+    Pos* loc1 = pl1.get_pos(); 
+    Pos* loc2 = pl2.get_pos();
+
     for(int i = 0; i < this->dim_y; i++) {
         for(int j = 0; j < this->dim_x; j++) { 
             /* Draw the players (Currently hardcoded for two players )*/
-            if (j == pl1.get_x() && i == pl1.get_y()) { 
+            if (j == loc1->get_x() && i == loc1->get_y()) { 
                 printf("%c ", pl1.get_cursor());
                 continue;
             }
 
-            if (j == pl2.get_x() && i == pl2.get_y()) { 
+            if (j == loc2->get_x() && i == loc2->get_y()) { 
                 printf("%c ", pl2.get_cursor());
                 continue;
             }
@@ -57,6 +61,10 @@ static void getch(Player* pl) {
     tcgetattr(STDIN_FILENO, &t);
     t.c_lflag &= ~ICANON;
     tcsetattr(STDIN_FILENO, TCSANOW, &t);
+    
+    /** Get current x and y possitions of player */
+    int curr_x = pl->get_pos()->get_x();
+    int curr_y = pl->get_pos()->get_y();
 
 // Once the buffering is turned off, the rest is simple.
     char c,d,e;
@@ -65,10 +73,10 @@ static void getch(Player* pl) {
     cin >> e;
 // Using 3 char type, Cause up down right left consist with 3 character
     if ((c==27)&&(d==91)) {
-        if (e==K_UP)    {pl->move_cursor( 0,-1);}
-        if (e==K_DOWN)  {pl->move_cursor( 0, 1);}
-        if (e==K_RIGHT) {pl->move_cursor( 1, 0);}
-        if (e==K_LEFT)  {pl->move_cursor(-1, 0);}
+        if (e==K_UP)    {pl->move_cursor(Pos(curr_x, curr_y-1));}
+        if (e==K_DOWN)  {pl->move_cursor(Pos(curr_x, curr_y + 1));}
+        if (e==K_RIGHT) {pl->move_cursor(Pos(curr_x + 1, curr_y));}
+        if (e==K_LEFT)  {pl->move_cursor(Pos(curr_x-1, curr_y));}
     }
 }
 

@@ -15,26 +15,11 @@
 #include "player.h"
 #include "map.h"
 
+#define DEBUG
 using namespace std;
 
 /* This just seems like a fancy way of doing a stupid simple define */
-enum gamemode { ONE=0, TWO=1, EXIT=2};
-
-/* Keypress hex sequence values (WASD)
- * Reading hex values from arrow keys is a bitch, there's like 3 of them 
- */
-#define KEY_0 0x31
-#define KEY_1 0x32
-#define KEY_2 0x33
-
-#define KEY_W 0x77
-#define KEY_A 0x61
-#define KEY_S 0x73
-#define KEY_D 0x64
-//#define KEY_UP    0x1b 0x5b 0x41
-//#define KEY_DOWN  0x1b 0x5b 0x42
-//#define KEY_LEFT  0x1B 0x5B 0x44
-//#define KEY_RIGHT 0x1Bx5B 0x43 0
+enum gamemode { ONE, TWO, EXIT};
 
 /** Structure classes for creating buildings */
 
@@ -97,19 +82,10 @@ int main() {
         map.draw_map(*pl1, *pl2);
 
         /* Temporary, this will eventually be replaced by listening to arrow key commands */
-        printf("Curr Loc: (%d, %d)\n", pl1->get_x(), pl1->get_y());
-
-        map.get_move(pl1);
-        printf("New Loc: (%d, %d)\n", pl1->get_x(), pl1->get_y());
+#ifdef DEBUG
+        printf("Curr Loc: (%d, %d)\n", pl1->get_pos()->get_x(), pl1->get_pos()->get_x());
+#endif
         /* Get input from user on next action */
-        // TODO allow these to be comma seperated and retrieve a line at a time
-        // cout << "x: "; cin >> new_x;
-        // cout << endl << "y: "; cin >> new_y;    
-        // cout << endl;
-
-        /* Update player's position */
-        /* TODO Validate input from user */
-        // pl1.set_x(new_x);
-        // pl1.set_y(new_y);
+        map.get_move(pl1);
     }
 }

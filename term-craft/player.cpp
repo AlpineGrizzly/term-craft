@@ -9,33 +9,26 @@
 #include <iostream>
 #include "player.h"
 
-
-void Player::set_x(int new_x) { 
-    this->curr_x = new_x;
-}
-void Player::set_y(int new_y) { 
-    this->curr_y = new_y;
-
-}
+/**
+ * set_pos
+ * 
+ * Sets a new position of the player
+*/
+void Player::set_pos(Pos new_pos) { 
+    this->pos->set_x(new_pos.get_x());
+    this->pos->set_y(new_pos.get_y());
+}   
 
 /**
- * get_x
+ * get_pos
  * 
- * @returns x location of the player
+ * Get's the current position of the player and returns it
  * 
+ * @return the current position of the player
 */
-int Player::get_x() { 
-    return this->curr_x;
-}
-
-/**
- * get_y
- * 
- * @returns y location of the player
- * 
-*/
-int Player::get_y() { 
-    return this->curr_y;
+Pos* Player::get_pos() { 
+    Pos* tmp = this->pos;
+    return tmp;
 }
 
 /**
@@ -57,11 +50,8 @@ char Player::get_cursor() {
  * 
  * @return True if a valid move was made, false otherwise
 */
-bool Player::move_cursor(int new_x, int new_y) {   
-    this->set_x(this->get_x() + new_x);
-    this->set_y(this->get_y() + new_y);
-    printf("New location %d %d ", this->get_x(), this->get_y());
-    return 0;
+void Player::move_cursor(Pos new_pos) {   
+    this->set_pos(new_pos);
 }
 
 int Player::create_structure() { 
