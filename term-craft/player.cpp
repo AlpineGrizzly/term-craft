@@ -52,12 +52,15 @@ char Player::get_cursor() {
  * 
  * Given a new x and y coordinate on the map, move the player
  * 
- * @param new_x New x location to which to move player
- * @param new_y New y location to which to move player
+ * @param new_x Relative new x location to which to move player
+ * @param new_y Relative new y location to which to move player
  * 
  * @return True if a valid move was made, false otherwise
 */
-bool Player::move_cursor(int new_x, int new_y) { 
+bool Player::move_cursor(int new_x, int new_y) {   
+    this->set_x(this->get_x() + new_x);
+    this->set_y(this->get_y() + new_y);
+    printf("New location %d %d ", this->get_x(), this->get_y());
     return 0;
 }
 

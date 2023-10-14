@@ -80,29 +80,36 @@ int main() {
     int map_x = 50;
     int map_y = 20;
 
-    Map field = Map(map_x, map_y); /* Arbitrary initialization dims */
+    Map map = Map(map_x, map_y); /* Arbitrary initialization dims */
 
     /* Initialize player 1 */
-    Player pl1('@', 1,1);
-    Player pl2('&', map_x-2, map_y-2);
+    Player* pl1 = new Player('@', 1,1);
+    Player* pl2 = new Player('&', map_x-2, map_y-2);
 
     int new_x;
     int new_y;
 
     /* Main Game loop */
     while(1) { 
-        /* Draw the map for the player to see */
-        field.draw_map(pl1, pl2);
+        system("clear"); /* Clears screen so its not ugly looking */
 
+        /* Update map with new locations for player 1 and 2 */
+        map.draw_map(*pl1, *pl2);
+
+        /* Temporary, this will eventually be replaced by listening to arrow key commands */
+        printf("Curr Loc: (%d, %d)\n", pl1->get_x(), pl1->get_y());
+
+        map.get_move(pl1);
+        printf("New Loc: (%d, %d)\n", pl1->get_x(), pl1->get_y());
         /* Get input from user on next action */
         // TODO allow these to be comma seperated and retrieve a line at a time
-        cout << "x: "; cin >> new_x;
-        cout << endl << "y: "; cin >> new_y;    
-        cout << endl;
+        // cout << "x: "; cin >> new_x;
+        // cout << endl << "y: "; cin >> new_y;    
+        // cout << endl;
 
         /* Update player's position */
         /* TODO Validate input from user */
-        pl1.set_x(new_x);
-        pl1.set_y(new_y);
+        // pl1.set_x(new_x);
+        // pl1.set_y(new_y);
     }
 }

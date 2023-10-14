@@ -21,4 +21,5 @@ class Map {
             this->dim_y = y;
         }
         void draw_map(Player pl1, Player pl2);
+        void get_move(Player* plt1); 
 };

@@ -2,7 +2,7 @@
 
 set -e 
 
-BUILD_DIR="build/"
+BUILD_DIR="build"
 
 # Check for existing directory and remove if so
 if [ -d "$BUILD_DIR" ]; then
@@ -11,3 +11,5 @@ fi
 
 # Make it 
 cmake -B "$BUILD_DIR"
+(cd $BUILD_DIR && make)
+mv $BUILD_DIR/termcraft . 
