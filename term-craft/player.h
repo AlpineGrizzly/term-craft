@@ -42,6 +42,7 @@ class Player {
         Pos* get_pos();
         char get_cursor();
         void move_cursor(Pos new_pos);
+        /** TODO  V*/
         int create_structure();
         int create_unit();
 };

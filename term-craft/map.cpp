@@ -10,8 +10,11 @@
 #include <iostream>
 #include <termio.h>
 #include "map.h"
+#include <unistd.h>
 
 #define STDIN_FILENO 0
+
+/** Movement keys */
 #define K_UP    65
 #define K_DOWN  66
 #define K_RIGHT 67
@@ -68,10 +71,16 @@ static void getch(Player* pl) {
 
 // Once the buffering is turned off, the rest is simple.
     char c,d,e;
-    cin >> c;
+    cin >> c;    
+    if (c == 'd') { /* Test to see how I can intercept single non-arrow key presses */ 
+        cout << "GOT D" << endl;
+        sleep(1);
+        return;
+    }
     cin >> d;
     cin >> e;
-// Using 3 char type, Cause up down right left consist with 3 character
+    
+    /** Resolving arrow key inputs for cursor movement */
     if ((c==27)&&(d==91)) {
         if (e==K_UP)    {pl->move_cursor(Pos(curr_x, curr_y-1));}
         if (e==K_DOWN)  {pl->move_cursor(Pos(curr_x, curr_y + 1));}
@@ -80,7 +89,6 @@ static void getch(Player* pl) {
     }
 }
 
-#include <unistd.h>
 /* 
  * get_move
  * 
