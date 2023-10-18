@@ -83,7 +83,7 @@ int main() {
 
         /* Temporary, this will eventually be replaced by listening to arrow key commands */
 #ifdef DEBUG
-        printf("Curr Loc: (%d, %d)\n", pl1->get_pos()->get_x(), pl1->get_pos()->get_x());
+        printf("Curr Loc: (%d, %d)\n", pl1->get_pos()->get_x(), pl1->get_pos()->get_y());
 #endif
         /* Get input from user on next action */
         map.get_move(pl1);

@@ -3,11 +3,9 @@ C++ Terminal style game inspired by Starcraft I and II gameplay and my love of t
 
 
 ### Requirements  
-```sh
- apt-get install libncurses5-dev libncursesw5-dev
-```
 ### TODO 
 - [X] Drawing of map
+- [ ] Have game draw structures on the map from an array
 - [ ] Opposing players with bases that have associated health
 - [ ] Ability to create structures
 - [ ] Structures will have a time before they are built , represented by the default structure icon
