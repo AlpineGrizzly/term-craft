@@ -20,6 +20,12 @@ void Structure::set_health(int val) {
     this->health = val;
 }
 
+int Structure::get_health() { 
+    return this->health;
+}
+
+
+/*** Base class definitions */
 /**
  * spawn_drone
  * 
@@ -29,6 +35,20 @@ void Structure::set_health(int val) {
  * @return True if a drone was able to be spawned, false otherwise
 */
 bool Base::spawn_drone() { 
-    //
+    if (this->num_drones < MAX_DRONES) { 
+        this->num_drones += 1;
+        return true; 
+    }
     return false;
+}
+
+/**
+ * get_num_drones
+ * 
+ * Gets number of drones assigned to current base
+ * 
+ * @return Number of drones 
+*/
+int Base::get_num_drones() { 
+    return this->num_drones;
 }

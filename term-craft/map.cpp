@@ -22,21 +22,25 @@
 
 using namespace std;
 
-void Map::draw_map(Player pl1, Player pl2) {
+void Map::draw_map(Player* pls[]) {
     /* Get current location of players */
-    Pos* loc1 = pl1.get_pos(); 
-    Pos* loc2 = pl2.get_pos();
+    // Hardcoded for two players
+    Player* pl1 = pls[0];
+    Player* pl2 = pls[1];
+
+    Pos* loc1 = pl1->get_pos(); 
+    Pos* loc2 = pl2->get_pos();
 
     for(int i = 0; i < this->dim_y; i++) {
         for(int j = 0; j < this->dim_x; j++) { 
             /* Draw the players (Currently hardcoded for two players )*/
             if (j == loc1->get_x() && i == loc1->get_y()) { 
-                printf("%c ", pl1.get_cursor());
+                printf("%c ", pl1->get_cursor());
                 continue;
             }
 
             if (j == loc2->get_x() && i == loc2->get_y()) { 
-                printf("%c ", pl2.get_cursor());
+                printf("%c ", pl2->get_cursor());
                 continue;
             }
 
