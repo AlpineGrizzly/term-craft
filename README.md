@@ -32,6 +32,12 @@ Game   |    1. Base
             3. Wall 
 ```
 
+#### Resource Management idea 
+For the time being, each player will only be able to mine from a finite
+amount of resources within so many blocks of the original base; This can
+be further increased by the player by making upgrades to mine resources 
+faster. 
+
 A while loop will probaly sit there and listen seperate from cursor 
 movement while the menu is up.
 

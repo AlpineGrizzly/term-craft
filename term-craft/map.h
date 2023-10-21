@@ -9,6 +9,7 @@
 
 #include "player.h"
 #include "structure.h"
+#include "resource.h"
 
 #pragma once 
 
