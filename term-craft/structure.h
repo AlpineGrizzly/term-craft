@@ -23,8 +23,10 @@ class Structure {
             this->health = health;
             this->pos = new Pos(start_x, start_y);
         }
+        char get_icon() { return this->icon; }
         void set_health(int val);
         int get_health();
+        Pos* get_pos() { return this->pos; } 
 };
 
 /**

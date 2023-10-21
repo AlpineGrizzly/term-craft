@@ -31,11 +31,8 @@ class Player {
         void move_cursor(Pos new_pos);
         /** TODO  V*/
 #ifdef DEBUG
-        int get_base_health() { 
-            return this->base->get_health();
-        }
-        int get_num_drones() { 
-            return this->base->get_num_drones();
+        Base* get_base() { 
+            return this->base;
         }
 #endif
         int create_structure();
