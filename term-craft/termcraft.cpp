@@ -16,6 +16,7 @@
 #include "map.h"
 
 #define DEBUG
+
 using namespace std;
 
 /* This just seems like a fancy way of doing a stupid simple define */
@@ -56,23 +57,40 @@ int draw_menu() {
     return menu_item;
 }
 
+/*
+ * generate_map
+ * 
+ * Generates a new map and returns a char array 
+ *
+ * @return char array of new map generated
+ */
+char* generate_map(int dim_x, int dim_y) { 
+    /* Initializing map pointer */
+    char gen_map[dim_x][dim_y];
+
+    for(int i = 0; i < dim_y; i++) {
+        for(int j = 0; j < dim_x; j++) { 
+            if(i == 0 || j == 0 || i == dim_y - 1 || j == dim_x - 1)
+                gen_map[j][i] = '#'; 
+            else
+                gen_map[j][i] = '.';
+        }
+    }
+    return &gen_map;
+}
+
 int main() { 
-    //enum gamemode mode;
-    /* Declare necessary game objects */
+    /** Init map size */    
+    const int map_x = 50;
+    const int map_y = 20;
 
-    /** Init map size */
-    // TODO will allow this to be modifiable at the menu screen
-    int map_x = 50;
-    int map_y = 20;
+    /* Initialize the map */
+    char* new_map = generate_map(map_x, map_y); /* Generate a new map */
+    Map map = Map(map_x, map_y, &new_map);
 
-    Map map = Map(map_x, map_y); /* Arbitrary initialization dims */
-
-    /* Initialize player 1 */
+    /* Initialize Player locations on map */
     Player* pl1 = new Player('@', 1,1);
     Player* pl2 = new Player('&', map_x-2, map_y-2);
-
-    int new_x;
-    int new_y;
 
     /* Main Game loop */
     while(1) { 
@@ -88,4 +106,6 @@ int main() {
         /* Get input from user on next action */
         map.get_move(pl1);
     }
+    free(pl1);
+    free(pl2);
 }
