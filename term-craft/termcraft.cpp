@@ -23,6 +23,14 @@ enum gamemode { ONE, TWO, EXIT};
 
 /** Structure classes for creating buildings */
 
+void draw_logo() { 
+printf("\t\t▄▄▄▄▄▄▄▄ .▄▄▄  • ▌ ▄ ·.  ▄▄· ▄▄▄   ▄▄▄· ·▄▄▄▄▄▄▄▄\n"
+       "\t\t•██  ▀▄.▀·▀▄ █··██ ▐███▪▐█ ▌▪▀▄ █·▐█ ▀█ ▐▄▄·•██  \n"
+       "\t\t ▐█.▪▐▀▀▪▄▐▀▀▄ ▐█ ▌▐▌▐█·██ ▄▄▐▀▀▄ ▄█▀▀█ ██▪  ▐█.▪\n"
+       "\t\t ▐█▌·▐█▄▄▌▐█•█▌██ ██▌▐█▌▐███▌▐█•█▌▐█ ▪▐▌██▌. ▐█▌·\n"
+       "\t\t ▀▀▀  ▀▀▀ .▀  ▀▀▀  █▪▀▀▀·▀▀▀ .▀  ▀ ▀  ▀ ▀▀▀  ▀▀▀ \n");
+}
+
 /** Unit classes for creating units to fight */
 /**
  * draw_menu
@@ -40,9 +48,7 @@ int draw_menu() {
     int menu_item = 0;
     
     while(1) { 
-        printf("====================================\n"
-               "             TERMCRAFT\n" 
-               "====================================\n");
+        draw_logo();
         printf("1. 1-Player\n2. 2-Player\n3. Exit\n");
         
         cin >> menu_item;
@@ -71,25 +77,11 @@ int main() {
     /* Array of pointers to our player objects */
     Player *pls[] = {pl1, pl2};
 
-    /* Array of pointers that will hold our structures present on board */
-    // TODO Each player will have their own array of bases and structures associated to them
-    // This is just for testing
-    //Structure* congo[MAX_STRUCTURES] = 
-    //    {
-    // Base* pl1_base = new Base('^', 
-    //                           100, 
-    //                           5, 
-    //                           pl1->get_pos()->get_x(), 
-    //                           pl1->get_pos()->get_y()); 
-    //     new Base('+', 100, 5, pl2->get_pos()->get_x(), pl2->get_pos()->get_y()) 
-    //    };
-
     /* Main Game loop */
     while(1) { 
         system("clear"); /* Clears screen so its not ugly looking */
-
+        draw_logo();
         /* Update map with new locations for player 1 and 2 */
-        //map.draw_map(*pl1, *pl2);
         map.draw_map(pls);
 
         /* Temporary, this will eventually be replaced by listening to arrow key commands */
