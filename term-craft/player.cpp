@@ -55,6 +55,27 @@ void Player::move_cursor(Pos new_pos) {
 }
 
 /**
+ * has_structure
+ * 
+ * Given a location on the map, say whether a structure is already placed here or not
+ * 
+ * @param loc Location to check for a structure
+ * 
+ * @return True if a structure is present, false otherwise
+*/
+bool Player::has_structure(Pos* loc) { 
+    Pos* tmp;
+    /* Iterate through player structures */
+    for(int i = 0; i < this->owned_structs; i++) {
+        tmp = this->structs[i]->get_pos();
+        if(tmp->get_x() == loc->get_x() && tmp->get_y() == loc->get_y()) { 
+            return true;
+        }
+    }
+    return false;
+}
+
+/**
  * create_structure
  * 
  * Create a new structure where the player's cursor currently is
@@ -63,11 +84,15 @@ void Player::move_cursor(Pos new_pos) {
 */
 int Player::create_structure(char structure) { 
     if (this->owned_structs >= MAX_STRUCTURES) return 0; /* Only you can prevent overflows */  
+    
+    /* Check if a structure already exists here */
+    if (has_structure(this->pos)) return 0;
+
     switch(structure) { 
         case 'w': // Build wall
             structs[this->owned_structs++] = new Structure('^', 50, this->pos->get_x(), this->pos->get_y());
     }
-    return 0;
+    return 1;
 }
 
 int Player::create_unit() { 

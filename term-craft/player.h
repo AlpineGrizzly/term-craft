@@ -42,6 +42,7 @@ class Player {
         Structure* get_structure(int idx) { return this->structs[idx];} 
         int get_owned_structs() { return this->owned_structs; }
         void set_owned_structs(int new_count) { this->owned_structs = new_count; }
+        bool has_structure(Pos* loc);
         int create_structure(char structure);
         int create_unit();
         
