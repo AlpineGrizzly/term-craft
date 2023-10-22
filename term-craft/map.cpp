@@ -70,22 +70,24 @@ void Map::draw_map(Player* pls[]) {
     printf("\n\n");
 }
 
+int Map::get_x_dim() { 
+    return this->dim_x;
+}
+int Map::get_y_dim() { 
+    return this->dim_y;
+}
 
 /** 
  * getch
  * 
  * Get a character input from the user and update their location on the field if it was valid
 */
-static void getch(Player* pl) { 
+static char getch(Player* pl) { 
     // Black magic to prevent Linux from buffering keystrokes.
     struct termios t;
     tcgetattr(STDIN_FILENO, &t);
     t.c_lflag &= ~ICANON;
     tcsetattr(STDIN_FILENO, TCSANOW, &t);
-    
-    /** Get current x and y possitions of player */
-    int curr_x = pl->get_pos()->get_x();
-    int curr_y = pl->get_pos()->get_y();
 
 // Once the buffering is turned off, the rest is simple.
     char c,d,e;
@@ -93,18 +95,15 @@ static void getch(Player* pl) {
     if (c == 'd') { /* Test to see how I can intercept single non-arrow key presses */ 
         cout << "GOT D" << endl;
         sleep(1);
-        return;
+        return 0;
     }
     cin >> d;
     cin >> e;
     
     /** Resolving arrow key inputs for cursor movement */
-    if ((c==27)&&(d==91)) {
-        if (e==K_UP)    {pl->move_cursor(Pos(curr_x, curr_y-1));}
-        if (e==K_DOWN)  {pl->move_cursor(Pos(curr_x, curr_y + 1));}
-        if (e==K_RIGHT) {pl->move_cursor(Pos(curr_x + 1, curr_y));}
-        if (e==K_LEFT)  {pl->move_cursor(Pos(curr_x-1, curr_y));}
-    }
+    if ((c==27)&&(d==91))
+        return e;
+    return 0;
 }
 
 /* 
@@ -114,8 +113,51 @@ static void getch(Player* pl) {
  * 
  * @param pl1 Instance of player one, used to update cursor location if move is valid
  */
-void Map::get_move(Player* pl1) { 
+void Map::get_move(Player* pl) { 
     /* Check if the player press an arrow key to move the cursor */
-    getch(pl1);
+    char e = getch(pl);
+    int new_x, new_y; /* values of new x and y position */
+
+    if (!e) 
+        return (void)"No arrow press";
+
+    /** Get current x and y possitions of player */
+    int curr_x = pl->get_pos()->get_x();
+    int curr_y = pl->get_pos()->get_y();
+    
     /* validate and make the move if it was so */
+    switch(e) { 
+        case K_UP:     
+            new_x = curr_x;
+            new_y = curr_y-1;
+            //pl->move_cursor(Pos(curr_x, curr_y-1));
+            break;
+        case K_DOWN:  
+            new_x = curr_x;
+            new_y = curr_y+1;
+            //pl->move_cursor(Pos(curr_x, curr_y + 1));
+            break;
+        case K_RIGHT: 
+            new_x = curr_x+1;
+            new_y = curr_y;
+            //pl->move_cursor(Pos(curr_x + 1, curr_y));
+            break;
+        case K_LEFT: 
+            new_x = curr_x-1;
+            new_y = curr_y;
+            //pl->move_cursor(Pos(curr_x-1, curr_y));
+            break;
+    }
+    /* Validate the new position */
+    /** Screen wrap if player moves outside of bounds */ 
+    // ((x % range) + range) % range
+    int wrap_x = ((new_x % this->dim_x) + this->dim_x) % this->dim_x;
+    int wrap_y = ((new_y % this->dim_y) + this->dim_y) % this->dim_y;
+    pl->move_cursor(Pos(wrap_x, wrap_y));
+    //if (new_x > 0 && new_x < this->dim_x-1) {  
+    //    if(new_y > 0 && new_y < this->dim_y-1)
+    //        pl->move_cursor(Pos(new_x, new_y));
+    //}else{
+    //    pl->move_cursor(Pos(new_x % this->dim_x, new_y));
+    //}
 }

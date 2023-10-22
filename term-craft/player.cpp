@@ -50,7 +50,7 @@ char Player::get_cursor() {
  * 
  * @return True if a valid move was made, false otherwise
 */
-void Player::move_cursor(Pos new_pos) {   
+void Player::move_cursor(Pos new_pos) {  
     this->set_pos(new_pos);
 }
 

@@ -22,8 +22,8 @@ class Map {
             this->dim_x = x;
             this->dim_y = y;
         }
-/* TODO Input will eventually just be an array of pointers to players to make it easier and expandable */
-        // draw_map(player[] players, structure[] structs);
         void draw_map(Player* pls[]);
         void get_move(Player* pl); 
+        int get_x_dim();
+        int get_y_dim();
 };

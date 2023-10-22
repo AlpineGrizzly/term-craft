@@ -5,6 +5,8 @@ C++ Terminal style game inspired by Starcraft I and II gameplay and my love of t
 ### Requirements  
 ### TODO 
 - [X] Drawing of map
+- [X] Bounds checking for player's cursor 
+- [X] Screen wrapping for cursorr
 - [ ] Resource management ot include mining gems / gases to create
       new structures and units
 - [ ] Have game draw structures on the map from an array
