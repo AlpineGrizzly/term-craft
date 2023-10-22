@@ -2,7 +2,9 @@
 C++ Terminal style game inspired by Starcraft I and II gameplay and my love of the RTS genre as a whole.
 
 
-### Requirements  
+### Requirements 
+### BUGS
+- [ ] Structures can be built on each other (This may prompt the switch to a map that has elements already laid out for checking, computationally would be way easier) 
 ### TODO 
 - [X] Drawing of map
 - [X] Bounds checking for player's cursor 

@@ -92,7 +92,10 @@ int main() {
 
 #ifdef DEBUG
         printf("Curr Loc: (%d, %d)\n", pl1->get_pos()->get_x(), pl1->get_pos()->get_y());
-        printf("Health: %d\nDrones: %d\n", pl1->get_base()->get_health(), pl1->get_base()->get_num_drones());
+        printf("Health: %d\nDrones: %d\nStructures: %d\n", 
+                pl1->get_base()->get_health(), 
+                pl1->get_base()->get_num_drones(),
+                pl1->get_owned_structs());
 #endif
         /* Get input from user on next action */
         map.get_move(pl1);
