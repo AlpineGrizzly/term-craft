@@ -14,7 +14,6 @@
 #include "map.h"
 
 #define DEBUG
-#define MAX_STRUCTURES 10 /* Defines how many structures can exist on the map */
 
 using namespace std;
 
@@ -70,8 +69,8 @@ int draw_menu() {
 
 int main() { 
     /** Init map size */    
-    const int map_x = 100;
-    const int map_y = 40;
+    const int map_x = 50;
+    const int map_y = 20;
 
     /* Initialize the map */
     Map map = Map(map_x, map_y);

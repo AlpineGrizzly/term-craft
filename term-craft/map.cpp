@@ -20,6 +20,9 @@
 #define K_RIGHT 67
 #define K_LEFT  68
 
+/** Construction keys */
+#define BUILD_WALL 'w'
+
 using namespace std;
 
 void Map::draw_map(Player* pls[]) {
@@ -49,15 +52,28 @@ void Map::draw_map(Player* pls[]) {
                 continue;
             }
 
-            /* Draw Bases */
-            if (j == base1->get_x() && i ==base1->get_y()) { 
-                printf("%c ", pl1->get_base()->get_icon());
-                continue;
+            /* Draw structures */
+            // TODO Going to hardcode for player 1 for now
+            int t = 0; 
+            for(int k =0; k < pl1->get_owned_structs(); k++) {  
+                if(j == pl1->get_structure(k)->get_pos()->get_x() && i ==  pl1->get_structure(k)->get_pos()->get_y()) { 
+                    printf("%c ", pl1->get_structure(k)->get_icon());
+                    t = 1;
+                    break;
+                }
             }
-            if (j == base2->get_x() && i ==base2->get_y()) { 
-                printf("%c ", pl2->get_base()->get_icon());
-                continue;
+            
+            if (t) continue;
+
+            for(int k =0; k < pl2->get_owned_structs(); k++) {  
+                if(j == pl2->get_structure(k)->get_pos()->get_x() && i ==  pl2->get_structure(k)->get_pos()->get_y()) { 
+                    printf("%c ", pl2->get_structure(k)->get_icon());
+                    t = 1;
+                    break;
+                }
             }
+
+            if (t) continue; // this sucks
 
             /* Draw the map */
             if(i == 0 || j == 0 || i == this->dim_y - 1 || j == this->dim_x - 1) /* Draw edges */
@@ -89,14 +105,10 @@ static char getch(Player* pl) {
     t.c_lflag &= ~ICANON;
     tcsetattr(STDIN_FILENO, TCSANOW, &t);
 
-// Once the buffering is turned off, the rest is simple.
+    // Once the buffering is turned off, the rest is simple.
     char c,d,e;
     cin >> c;    
-    if (c == 'd') { /* Test to see how I can intercept single non-arrow key presses */ 
-        cout << "GOT D" << endl;
-        sleep(1);
-        return 0;
-    }
+    if (c == BUILD_WALL) return c;
     cin >> d;
     cin >> e;
     
@@ -115,49 +127,45 @@ static char getch(Player* pl) {
  */
 void Map::get_move(Player* pl) { 
     /* Check if the player press an arrow key to move the cursor */
-    char e = getch(pl);
+    char p = getch(pl);
     int new_x, new_y; /* values of new x and y position */
 
-    if (!e) 
-        return (void)"No arrow press";
+    if (!p) return (void)"No key press";
+
+    /** Check for non-cursor movement keys */
+    if (p == BUILD_WALL) { 
+        cout << "BUILD WALL!" << endl;
+        sleep(1);
+        return;
+    }
 
     /** Get current x and y possitions of player */
     int curr_x = pl->get_pos()->get_x();
     int curr_y = pl->get_pos()->get_y();
     
-    /* validate and make the move if it was so */
-    switch(e) { 
+    /* Validate and make the move if it was so */
+    switch(p) { 
         case K_UP:     
             new_x = curr_x;
             new_y = curr_y-1;
-            //pl->move_cursor(Pos(curr_x, curr_y-1));
             break;
         case K_DOWN:  
             new_x = curr_x;
             new_y = curr_y+1;
-            //pl->move_cursor(Pos(curr_x, curr_y + 1));
             break;
         case K_RIGHT: 
             new_x = curr_x+1;
             new_y = curr_y;
-            //pl->move_cursor(Pos(curr_x + 1, curr_y));
             break;
         case K_LEFT: 
             new_x = curr_x-1;
             new_y = curr_y;
-            //pl->move_cursor(Pos(curr_x-1, curr_y));
             break;
     }
     /* Validate the new position */
     /** Screen wrap if player moves outside of bounds */ 
-    // ((x % range) + range) % range
+    /* Formula for wrapping : ((x % range) + range) % range */
     int wrap_x = ((new_x % this->dim_x) + this->dim_x) % this->dim_x;
     int wrap_y = ((new_y % this->dim_y) + this->dim_y) % this->dim_y;
     pl->move_cursor(Pos(wrap_x, wrap_y));
-    //if (new_x > 0 && new_x < this->dim_x-1) {  
-    //    if(new_y > 0 && new_y < this->dim_y-1)
-    //        pl->move_cursor(Pos(new_x, new_y));
-    //}else{
-    //    pl->move_cursor(Pos(new_x % this->dim_x, new_y));
-    //}
 }

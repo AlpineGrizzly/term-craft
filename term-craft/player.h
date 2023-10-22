@@ -9,12 +9,16 @@
 #pragma once
 #include "structure.h"
 #define DEBUG
+#define MAX_STRUCTURES 10 /* Defines how many structures can exist on the map */
+
 
 class Player { 
     private:
-        Pos* pos;    /* Position of Player on field */
-        char cursor; /* Symbol that represents the player on the map */
-        Base* base;   /* pointer to Player's base object */
+        Pos* pos;             /* Position of Player on field */
+        char cursor;          /* Symbol that represents the player on the map */
+        Base* base;           /* pointer to Player's base object */
+        Structure* structs[MAX_STRUCTURES]; /* Structures controlled by the player */ 
+        int owned_structs;
     public:
         Player(char cursor, int start_x, int start_y) { /* Constructor for players cursor and start location */
             this->cursor = cursor;
@@ -23,18 +27,21 @@ class Player {
                                   100, 
                                   5, 
                                   this->get_pos()->get_x(), 
-                                  this->get_pos()->get_y()); 
+                                  this->get_pos()->get_y());
+            this->structs[0] = this->base;
+            this->owned_structs = 1;
+             
         }
         void set_pos(Pos new_pos);
         Pos* get_pos();
         char get_cursor();
         void move_cursor(Pos new_pos);
-        /** TODO  V*/
-#ifdef DEBUG
         Base* get_base() { 
             return this->base;
         }
-#endif
+        Structure* get_structure(int idx) { return this->structs[idx];} 
+        int get_owned_structs() { return this->owned_structs; }
+        void set_owned_structs(int new_count) { this->owned_structs = new_count; }
         int create_structure();
         int create_unit();
         
