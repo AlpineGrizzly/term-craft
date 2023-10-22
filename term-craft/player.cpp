@@ -54,8 +54,19 @@ void Player::move_cursor(Pos new_pos) {
     this->set_pos(new_pos);
 }
 
-int Player::create_structure() { 
-
+/**
+ * create_structure
+ * 
+ * Create a new structure where the player's cursor currently is
+ * 
+ * @param struct Structure to be built
+*/
+int Player::create_structure(char structure) { 
+    if (this->owned_structs >= MAX_STRUCTURES) return 0; /* Only you can prevent overflows */  
+    switch(structure) { 
+        case 'w': // Build wall
+            structs[this->owned_structs++] = new Structure('^', 50, this->pos->get_x(), this->pos->get_y());
+    }
     return 0;
 }
 

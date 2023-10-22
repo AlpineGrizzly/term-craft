@@ -9,7 +9,7 @@
 #pragma once
 #include "structure.h"
 #define DEBUG
-#define MAX_STRUCTURES 10 /* Defines how many structures can exist on the map */
+#define MAX_STRUCTURES 20 /* Defines how many structures can exist on the map */
 
 
 class Player { 
@@ -42,7 +42,7 @@ class Player {
         Structure* get_structure(int idx) { return this->structs[idx];} 
         int get_owned_structs() { return this->owned_structs; }
         void set_owned_structs(int new_count) { this->owned_structs = new_count; }
-        int create_structure();
+        int create_structure(char structure);
         int create_unit();
         
 };

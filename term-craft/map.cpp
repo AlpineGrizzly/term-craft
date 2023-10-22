@@ -34,10 +34,6 @@ void Map::draw_map(Player* pls[]) {
     /* Player locations */
     Pos* loc1 = pl1->get_pos(); 
     Pos* loc2 = pl2->get_pos();
-
-    /* Base locations */
-    Pos* base1 = pl1->get_base()->get_pos();
-    Pos* base2 = pl2->get_base()->get_pos();
     
     for(int i = 0; i < this->dim_y; i++) {
         for(int j = 0; j < this->dim_x; j++) { 
@@ -53,7 +49,9 @@ void Map::draw_map(Player* pls[]) {
             }
 
             /* Draw structures */
-            // TODO Going to hardcode for player 1 for now
+            /** Haven't decided if this is good or not; Definitely think having a char array 
+             * for the map would be more efficient than looking up a list of objects everytime
+            */
             int t = 0; 
             for(int k =0; k < pl1->get_owned_structs(); k++) {  
                 if(j == pl1->get_structure(k)->get_pos()->get_x() && i ==  pl1->get_structure(k)->get_pos()->get_y()) { 
@@ -134,8 +132,7 @@ void Map::get_move(Player* pl) {
 
     /** Check for non-cursor movement keys */
     if (p == BUILD_WALL) { 
-        cout << "BUILD WALL!" << endl;
-        sleep(1);
+        pl->create_structure(BUILD_WALL);
         return;
     }
 
