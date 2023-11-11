@@ -1,10 +1,27 @@
 ## Term Craft by AlpineGrizzly 
-C++ Terminal style game inspired by Starcraft I and II gameplay and my love of the RTS genre as a whole.
+C++ Terminal style game inspired by Starcraft I and II gameplay and my love of the RTS genre as a whole. 
+
+### Game Goal
+This will be like a colony like game where you can mine resources to expand population at nodes that can go to neighboring nodes to increase population 
+to fend off attacks from other players. Buildings can be constructed to encourage more growth. Player will attempt to overtake each others nodes until someone
+has taken over the entire map.
+
+Each node has population and enemy nodes feeding into opponent nodes will decrease it by one until it is overtaken
+```sh
+@ ----> @ <----- $  
+23      1        40
+```
 
 
 ### Requirements 
 ### BUGS
-- [X] Structures can be built on each other (This may prompt the switch to a map that has elements already laid out for checking, computationally would be way easier) 
+- [X] Structures can be built on each other (This may prompt the switch to a map that has elements already laid out for checking, computationally would be way easier)
+- [ ] Player is able to create structures on the board of the map (Problem Im running into with this one
+is the player's cursor has no way of knowing the dimensions of the map unless I let it see the const defined in main. Idk) 
+- [ ] Not quite sure this counts as a bug, but when it comes time to do resources
+The loop only updates itself as the player moves there cursor. Going to have to make
+the Cin listener nonblocking.
+(Another suggestion could be to use a thread to update the world and players seperately?) 
 ### TODO 
 - [X] Drawing of map
 - [X] Bounds checking for player's cursor 

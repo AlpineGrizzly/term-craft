@@ -65,6 +65,8 @@ void Player::move_cursor(Pos new_pos) {
 */
 bool Player::has_structure(Pos* loc) { 
     Pos* tmp;
+    /* Base case: Are we currently placed on the border of map */
+    //if(tmp->get_x() == 0 || tmp->get_x() == )
     /* Iterate through player structures */
     for(int i = 0; i < this->owned_structs; i++) {
         tmp = this->structs[i]->get_pos();
@@ -84,7 +86,7 @@ bool Player::has_structure(Pos* loc) {
 */
 int Player::create_structure(char structure) { 
     if (this->owned_structs >= MAX_STRUCTURES) return 0; /* Only you can prevent overflows */  
-    
+
     /* Check if a structure already exists here */
     if (has_structure(this->pos)) return 0;
 

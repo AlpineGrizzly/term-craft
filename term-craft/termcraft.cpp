@@ -71,6 +71,7 @@ int main() {
     /** Init map size */    
     const int map_x = 50;
     const int map_y = 20;
+    int test = 0;
 
     /* Initialize the map */
     Map map = Map(map_x, map_y);
@@ -89,13 +90,14 @@ int main() {
         
         /* Update map with new locations for player 1 and 2 */
         map.draw_map(pls);
-
+        test++;
 #ifdef DEBUG
         printf("Curr Loc: (%d, %d)\n", pl1->get_pos()->get_x(), pl1->get_pos()->get_y());
-        printf("Health: %d\nDrones: %d\nStructures: %d\n", 
+        printf("Health: %d\nDrones: %d\nStructures: %d\nResourecs: %d\n", 
                 pl1->get_base()->get_health(), 
                 pl1->get_base()->get_num_drones(),
-                pl1->get_owned_structs());
+                pl1->get_owned_structs(),
+                test);
 #endif
         /* Get input from user on next action */
         map.get_move(pl1);

@@ -12,4 +12,3 @@ fi
 # Make it 
 cmake -B "$BUILD_DIR"
 (cd $BUILD_DIR && make)
-mv $BUILD_DIR/termcraft . 
